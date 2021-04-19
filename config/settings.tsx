@@ -1,0 +1,1 @@
+export const ipserver = "http://10.26.47.30:2500";
