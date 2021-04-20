@@ -1,7 +1,23 @@
 import * as React from "react"
-import {View,Text} from 'react-native'
+import {View,Text,Image} from 'react-native'
 import {ipserver} from "../config/settings"
-export default function Home (){
+import {styles} from "../css/Styles";
+import {createStackNavigator} from "@react-navigation/stack";
+import Detalhes from "./Detalhes";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import {NavigationContainer} from "@react-navigation/native"
+const Stack = createStackNavigator();
+export default function Home(){
+    return(
+        <NavigationContainer independent={true}>
+            <Stack.Navigator>
+                <Stack.Screen name="ListarProdutos" component={ListarProdutos}/>
+                <Stack.Screen name="Detalhes" component={Detalhes}/>
+            </Stack.Navigator>
+        </NavigationContainer>
+    )}
+        function ListarProdutos({navigation}){
+    
     //vamos construir uma estrutura oara carregar os dados sobre os produtos que virão do banco de dados.
     // Iremos cruar um array(lista) com o uso de uma constante chamada produtos
     const[produtos,setProdutos] = React.useState([]);
@@ -14,8 +30,24 @@ export default function Home (){
         .catch((erro)=>console.error(`Erro ao tentar carregar os produtos -> ${erro}`))
     },[])
     return(
-        <View>
+        <View style ={styles.container}>
             <Text>Tela Home</Text>
+            <View style={styles.display}>
+            {
+                
+                produtos.map((item,ix)=>(
+                    <TouchableOpacity onPress={()=>{
+                        navigation.navigate("Detalhes",{idprodutos:`${item._id}`})
+                    }} style={styles.acesso}>
+                    <View key={item._id} style={styles.cxproduto}>
+                        <Image source={{uri:`${item.foto}`}} style={styles.foto}/>
+                        <Text style={styles.nomeproduto}>{item.nomeproduto}</Text>
+                        <Text style={styles.preco}>{item.preco}</Text>
+                    </View>
+                    </TouchableOpacity>
+                ))
+            }
+            </View>
         </View>
     );
 }
