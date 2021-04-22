@@ -1,7 +1,8 @@
 import * as React from "react"
-import {View,Text,Image} from 'react-native'
+import {View,Text,Image, TouchableOpacity, ScrollView, PanResponder} from 'react-native'
 import {ipserver} from "../config/settings"
 import {styles} from "../css/Styles"
+import {AntDesign} from '@expo/vector-icons'
 export default function Detalhes({route}){
     const{idprodutos} = route.params;
     console.log(route.params)
@@ -18,15 +19,44 @@ export default function Detalhes({route}){
     },[])
     return(
         <View style ={styles.container}>
-            <Text>Tela Home</Text>
+              <ScrollView horizontal={false}>
             <View style={styles.display}>
+              
             
                     <View style={styles.cxproduto}>
-                        <Image source={{uri:`${produtos.foto}`}} style={styles.foto}/>
+                        <Image source={{uri:`${produtos.foto}`}} style={styles.fotodetalhe}/>
                         <Text style={styles.nomeproduto}>{produtos.nomeproduto}</Text>
+                        <Text style={styles.nomeproduto}>{produtos.descricao}</Text>
                         <Text style={styles.preco}>{produtos.preco}</Text>
+                        <Text style={styles.preco}>Codigo do produto:{produtos._id}</Text>
                     </View>
+                    <TouchableOpacity onPress={()=>{
+                        adicionarCarrinho(produtos);
+                    }} style={styles.btncarrinho}>
+                        <Text style={styles.txtcarrinho}><AntDesign name='shoppingcart' size={20} color={'#fff'}/> Carrinho</Text>
+
+                    </TouchableOpacity>
+                   
             </View>
+            </ScrollView>
         </View>
     );
+}
+function adicionarCarrinho(dados){
+    fetch(`${ipserver}/carrinho/adicionar`,{
+        method:"POST",
+        headers:{
+            accept:"application/json",
+            "content-type":"application/json"
+        },
+        body:JSON.stringify({
+            idproduto:dados._id,
+            nomeproduto:dados.nomeproduto,
+            preco:dados.preco,
+            foto:dados.foto
+        })
+    })
+    .then((response)=>response.json())
+    .then((resultado)=>alert(resultado.rs))
+    .catch((error)=>alert(`Não foi possivel adicionar 💀- ${error}`))
 }

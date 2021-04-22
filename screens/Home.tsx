@@ -11,7 +11,7 @@ export default function Home(){
     return(
         <NavigationContainer independent={true}>
             <Stack.Navigator>
-                <Stack.Screen name="ListarProdutos" component={ListarProdutos}/>
+                <Stack.Screen name="ListarProdutos" component={ListarProdutos} options={{headerShown:false}}/>
                 <Stack.Screen name="Detalhes" component={Detalhes}/>
             </Stack.Navigator>
         </NavigationContainer>
@@ -31,7 +31,6 @@ export default function Home(){
     },[])
     return(
         <View style ={styles.container}>
-            <Text>Tela Home</Text>
             <View style={styles.display}>
             {
                 

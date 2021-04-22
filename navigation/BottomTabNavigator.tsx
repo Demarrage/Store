@@ -103,7 +103,7 @@ function HomeNavigator() {
       <HomeStack.Screen
         name="Home"
         component={Home}
-        options={{ headerTitle: 'Home' }}
+        options={{ headerTitle: 'Jojo Store', headerTitleAlign:'center' }}
       />
     </HomeStack.Navigator>
   );
@@ -145,7 +145,7 @@ function CarrinhoNavigator() {
       <CarrinhoStack.Screen
         name="Carrinho"
         component={Carrinho}
-        options={{ headerTitle: 'Carrinho' }}
+        options={{ headerTitle: 'Jojo Store - Carrinho', headerTitleAlign:'center' }}
       />
     </CarrinhoStack.Navigator>
   );
