@@ -51,7 +51,31 @@ export const styles = StyleSheet.create({
     txtcarrinho:{
         color:'#fff',
         fontWeight:'bold'
-        
 
+    },
+    input:{
+        width:300,
+        padding:10,
+        marginBottom:5,
+        borderBottomColor:'silver',
+        borderBottomWidth:1,
+        marginLeft:'auto',
+        marginRight:'auto',
+    },
+    btncadastro:{
+        backgroundColor:'rgb(0,0,0)',
+        width:100,
+        height:100,
+        borderRadius:50,
+        marginLeft:'auto',
+        marginRight:'auto',
+        marginTop:50,
+        paddingTop:40,
+        shadowColor:'black',
+        shadowOffset:{width:5, height:5},
+        shadowOpacity:0.9,
+        shadowRadius:5,
+        elevation:10
+        
     }
 })
