@@ -75,7 +75,7 @@ export const styles = StyleSheet.create({
         shadowOffset:{width:5, height:5},
         shadowOpacity:0.9,
         shadowRadius:5,
-        elevation:10
+        elevation:10    
         
     }
 })
